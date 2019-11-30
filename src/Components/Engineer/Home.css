@@ -1,0 +1,15 @@
+.jumbotron {
+    position: relative;
+    padding: 190px 0px 120px 0px;
+    background-attachment: fixed;
+    background: url('../img/3.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat; }
+    body {
+        font-family: 'Raleway', sans-serif;
+        color: #496174;
+        background: #fff;
+        font-size: 14px;
+        line-height: 24px; 
+      }

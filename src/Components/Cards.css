@@ -1,0 +1,20 @@
+.row {
+
+    display: inline;    
+    /* border-radius: 50px;
+    border: 8px solid #73AD21;
+    grid-template-columns: 300px;
+    grid-template-rows: 210px 210px 210px;
+    padding: 20px;
+    background: white;
+    width: 200px;
+    height: 150px; */
+  }
+  /* #card .card-body{
+    border-radius: 25px;
+    border: 2px;
+    padding: 20px;
+    width: 200px;
+    height: 150px;
+  } */
+
