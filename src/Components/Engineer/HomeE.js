@@ -29,7 +29,7 @@ export default class HomeE extends Component {
   componentDidMount() {
     var token = localStorage.getItem('Authorization');
     axios.defaults.headers.common['Authorization'] = token;
-    fetch('http://localhost:4000/engineer/read')
+    fetch('http://35.170.248.238:7000/engineer/read')
       .then(response => response.json())
       .then(data => this.setState({ items: data }))
     let login = localStorage.getItem('Login');
@@ -58,7 +58,7 @@ export default class HomeE extends Component {
                 {/* <br></br>            */}
                 <div className="card-body  ml-1 mt-2" >
                   <div className="card" style={{ width: '15rem' }}>
-                    <img width="400" height="200" src={`http://localhost:4000/myhire/file/` + item.photo} className="card-img-top" alt="..." />
+                    <img width="400" height="200" src={`http://35.170.248.238:7000/myhire/file/` + item.photo} className="card-img-top" alt="..." />
                     <h4 className="text-center">{item.name}</h4>
                     <h6 className="card-text">{item.email}</h6>
                     <h6 className="card-text">Skill: {item.skill}</h6>

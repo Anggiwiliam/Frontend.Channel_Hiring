@@ -57,7 +57,7 @@ export default class Project extends Component {
             
           const response = await axios({
             method: 'put',
-            url: 'http://localhost:4000/myhire/edit',
+            url: 'http://35.170.248.238:7000/myhire/edit',
             data: formData
             // data: {
             //     name: this.state.name,
@@ -87,7 +87,7 @@ export default class Project extends Component {
         try{  
           const response = await axios({
             method: 'POST',
-            url: 'http://localhost:4000/myhire/createproject',
+            url: 'http://35.170.248.238:7000/myhire/createproject',
             data: {
                    name: this.state.name,
                    skill: this.state.skill,

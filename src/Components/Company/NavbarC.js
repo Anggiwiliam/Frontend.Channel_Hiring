@@ -43,7 +43,7 @@ class NavbarC extends Component {
     try {
       const response = await axios({
         method: 'get',
-        url: 'http://localhost:4000/myhire/logout',
+        url: 'http://35.170.248.238:7000/myhire/logout',
       });
       console.log(response.data.result);
       localStorage.removeItem("Authorization");

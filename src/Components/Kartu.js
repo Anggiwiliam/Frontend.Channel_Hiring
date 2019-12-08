@@ -12,7 +12,7 @@ export default class Kartu extends Component {
         
       }
       componentDidMount(){
-        axios.get(`http://localhost:5000/engineer`)
+        axios.get(`http://35.170.248.238:7000/engineer`)
         .then(res => {
           console.log(res);
           this.setState({ items: res.data});

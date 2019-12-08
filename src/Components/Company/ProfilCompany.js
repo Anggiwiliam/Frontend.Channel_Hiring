@@ -19,7 +19,7 @@ export default class ProfilCompany extends Component {
     
     var token = localStorage.getItem('Authorization');
     axios.defaults.headers.common['Authorization'] = token;
-    fetch('http://localhost:4000/company/by/'+idEng  )
+    fetch('http://35.170.248.238:7000/company/by/'+idEng  )
     .then(response => response.json())
     .then(data => this.setState({ arr_engineer: data[0] })      )
     let login = localStorage.getItem('Login');
@@ -59,7 +59,7 @@ export default class ProfilCompany extends Component {
                     <div className="row">
                       <div className="col-xs-12 col-sm-3 center">
                         <span className="profile-picture">
-                          <img className="editable img-responsive" alt=" Avatar" id="avatar2" width="250" height="250" src={`http://localhost:4000/myhire/file/` + this.state.arr_engineer.logo} />
+                          <img className="editable img-responsive" alt=" Avatar" id="avatar2" width="250" height="250" src={`http://35.170.248.238:7000/myhire/file/` + this.state.arr_engineer.logo} />
                         </span>
 
                       </div>{/* /.col */}

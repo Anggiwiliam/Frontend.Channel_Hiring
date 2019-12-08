@@ -46,7 +46,7 @@ export default class Hire extends Component {
   handleSubmit = async (event) => {
     event.preventDefault()
     console.log(this.state)
-    const response = await axios.post(`http://localhost:4000/hire/create/`, this.state)
+    const response = await axios.post(`http://35.170.248.238:7000/hire/create/`, this.state)
     console.log(response)
     
 
@@ -62,7 +62,7 @@ export default class Hire extends Component {
             
           const response = await axios({
             method: 'post',
-            url: 'http://localhost:4000/hire/create',
+            url: 'http://35.170.248.238:7000/hire/create',
             data: formData
             
           });
@@ -78,7 +78,7 @@ export default class Hire extends Component {
       
       var token = localStorage.getItem('Authorization');
       axios.defaults.headers.common['Authorization'] = token;
-      fetch('http://localhost:4000/engineer/by/'+idEng  )
+      fetch('http://35.170.248.238:7000/engineer/by/'+idEng  )
       .then(response => response.json())
       .then(data => this.setState({ arr_engineer: data[0] })      )
       let login = localStorage.getItem('Login');
@@ -93,7 +93,7 @@ export default class Hire extends Component {
       }
     }
     // async componentDidMount() {
-    //     const response = await axios.get(`http://localhost:4000/myhire/readproject`);
+    //     const response = await axios.get(`http://35.170.248.238:7000/myhire/readproject`);
     //     const res = response.data.result;
     //     if (response.data) {
     //       const arr_pro = res.map(i => ({

@@ -38,7 +38,7 @@ class Register extends Component {
     try {
       const response = await axios({
         method: 'post',
-        url: 'http://localhost:4000/myhire/regis',
+        url: 'http://35.170.248.238:7000/myhire/regis',
         data: {
           username: this.state.username,
           password: this.state.password,

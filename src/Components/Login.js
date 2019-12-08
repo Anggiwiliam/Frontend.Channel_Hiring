@@ -15,7 +15,7 @@ export default class Login extends Component {
   handlerSubmit= async (event)=>{
     event.preventDefault()
     console.log(this.state) 
-    const response = await axios.post(`http://localhost:5000/login/`, this.state)
+    const response = await axios.post(`http://35.170.248.238:7000/login/`, this.state)
     this.props.history.push('/company/home')
     console.log(response)
     localStorage.setItem("JWT", JSON.stringify(response.data));

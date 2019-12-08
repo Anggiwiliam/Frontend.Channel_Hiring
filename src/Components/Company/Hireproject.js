@@ -59,7 +59,7 @@ export default class Hireproject extends Component {
             
           const response = await axios({
             method: 'put',
-            url: 'http://localhost:4000/myhire/edit',
+            url: 'http://35.170.248.238:7000/myhire/edit',
             data: formData
             // data: {
             //     name: this.state.name,
@@ -89,7 +89,7 @@ export default class Hireproject extends Component {
         try{  
           const response = await axios({
             method: 'POST',
-            url: 'http://localhost:4000/myhire/createproject',
+            url: 'http://35.170.248.238:7000/myhire/createproject',
             data: {
                    name: this.state.name,
                    skill: this.state.skill,
@@ -109,7 +109,7 @@ export default class Hireproject extends Component {
         
         var token = localStorage.getItem('Authorization');
         axios.defaults.headers.common['Authorization'] = token;
-        fetch('http://localhost:4000/engineer/by/'+idEng  )
+        fetch('http://35.170.248.238:7000/engineer/by/'+idEng  )
         .then(response => response.json())
         .then(data => this.setState({ arr_engineer: data[0] })      )
         let login = localStorage.getItem('Login');

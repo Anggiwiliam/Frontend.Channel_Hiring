@@ -28,7 +28,7 @@ export default class Project extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:4000/myhire/readproject`)
+    axios.get(`http://35.170.248.238:7000/myhire/readproject`)
       .then(res => {
         console.log(res);
         this.setState({ items: res.data });

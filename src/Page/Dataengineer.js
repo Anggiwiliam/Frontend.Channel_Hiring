@@ -70,7 +70,7 @@ export default class Dataengineer extends Component {
             
           const response = await axios({
             method: 'post',
-            url: 'http://localhost:4000/myhire/form',
+            url: 'http://35.170.248.238:7000/myhire/form',
             data: formData
             
           });

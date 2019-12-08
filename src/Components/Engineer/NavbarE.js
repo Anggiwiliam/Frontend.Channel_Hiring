@@ -30,7 +30,7 @@ class NavbarE extends Component {
   componentDidMount() {
     var token = localStorage.getItem('Authorization');
     axios.defaults.headers.common['Authorization'] = token;
-    //  fetch('http://localhost:4000/engineer/read')
+    //  fetch('http://35.170.248.238:7000/engineer/read')
     // .then(response => response.json())
     // .then(data => this.setState({ items : data }))
     let login = localStorage.getItem('Login');
@@ -45,7 +45,7 @@ class NavbarE extends Component {
     try {
       const response = await axios({
         method: 'get',
-        url: 'http://localhost:4000/myhire/logout',
+        url: 'http://35.170.248.238:7000/myhire/logout',
       });
       console.log(response.data.result);
       localStorage.removeItem("Authorization");

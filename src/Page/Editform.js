@@ -70,7 +70,7 @@ export default class Editform extends Component {
             
           const response = await axios({
             method: 'put',
-            url: 'http://localhost:4000/myhire/edit',
+            url: 'http://35.170.248.238:7000/myhire/edit',
             data: formData
             // data: {
             //     name: this.state.name,
@@ -99,7 +99,7 @@ export default class Editform extends Component {
             
           const response = await axios({
             method: 'post',
-            url: 'http://localhost:4000/myhire/form',
+            url: 'http://35.170.248.238:7000/myhire/form',
             data: formData
             // data: {
             //     name: this.state.name,

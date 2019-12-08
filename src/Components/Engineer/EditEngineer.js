@@ -73,7 +73,7 @@ export default class EditEngineer extends Component {
             
           const response = await axios({
             method: 'put',
-            url: 'http://localhost:4000/myhire/edit',
+            url: 'http://35.170.248.238:7000/myhire/edit',
             data: formData
             
           });
@@ -89,7 +89,7 @@ export default class EditEngineer extends Component {
       
       var token = localStorage.getItem('Authorization');
       axios.defaults.headers.common['Authorization'] = token;
-      fetch('http://localhost:4000/engineer/by/'+idEng  )
+      fetch('http://35.170.248.238:7000/engineer/by/'+idEng  )
       .then(response => response.json())
       .then(data => this.setState({ arr_engineer: data[0] })      )
       let login = localStorage.getItem('Login');

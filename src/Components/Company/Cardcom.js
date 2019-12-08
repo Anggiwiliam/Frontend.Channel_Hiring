@@ -15,7 +15,7 @@ export default class Cardcom extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:4000/company/read`)
+    axios.get(`http://35.170.248.238:7000/company/read`)
       .then(res => {
         console.log(res);
         this.setState({ items: res.data });
@@ -40,7 +40,7 @@ export default class Cardcom extends Component {
                 {/* <br></br>            */}
                 <div className="card-body  ml-1 mt-2" >
                   <div className="card" style={{ width: '15rem' }}>
-                    <img width="400" height="200" src={`http://localhost:4000/myhire/file/` + item.logo} className="card-img-top" alt="..." />
+                    <img width="400" height="200" src={`http://35.170.248.238:7000/myhire/file/` + item.logo} className="card-img-top" alt="..." />
                     <h4 className="text-center">{item.name}</h4>
                     <h6 className="card-text">{item.email}</h6>
                     <h6 className="card-text">{item.location}</h6>

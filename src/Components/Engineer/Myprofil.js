@@ -16,10 +16,10 @@
     
 //     var token = localStorage.getItem('Authorization');
 //     axios.defaults.headers.common['Authorization'] = token;
-//     const profile = axios.get(`http://localhost:4000/myhire/by`)
+//     const profile = axios.get(`http://35.170.248.238:7000/myhire/by`)
 //     this.setState({ arr_engineer: profile.data})
 //     console.log(this.state.arr_engineer.name);
-//     // fetch('http://localhost:4000/engineer/by/'+idEng  )
+//     // fetch('http://35.170.248.238:7000/engineer/by/'+idEng  )
 //     // .then(response => response.json())
 //     // .then(data => this.setState({ arr_engineer: data[0] })      )
 //     // let login = localStorage.getItem('Login');
@@ -82,7 +82,7 @@
 //                   <div className="row">
 //                     <div className="col-xs-12 col-sm-3 center">
 //                       <span className="profile-picture">
-//                         {/* <img className="editable img-responsive" alt=" Avatar" id="avatar2" width="250" height="250"  src={`http://localhost:4000/myhire/file/` + this.state.arr_engineer.photo} /> */}
+//                         {/* <img className="editable img-responsive" alt=" Avatar" id="avatar2" width="250" height="250"  src={`http://35.170.248.238:7000/myhire/file/` + this.state.arr_engineer.photo} /> */}
 //                       </span>
 
 //                     </div>{/* /.col */}

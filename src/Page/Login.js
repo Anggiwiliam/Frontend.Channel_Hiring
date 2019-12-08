@@ -56,7 +56,7 @@ export default class Login extends Component {
   //   }
   // })
   // console.log(this.state)
-  // const response = await axios.post(`http://localhost:4000/myhire/login`, this.state.form)
+  // const response = await axios.post(`http://35.170.248.238:7000/myhire/login`, this.state.form)
   // this.props.history.push('/dataengineer')
   // console.log(response)
   // localStorage.setItem("JWT", JSON.stringify(response.data));
@@ -64,7 +64,7 @@ export default class Login extends Component {
     try {
       const response = await axios({
         method: 'post',
-        url: 'http://localhost:4000/myhire/login/',
+        url: 'http://35.170.248.238:7000/myhire/login/',
         data: {
           username: this.state.username,
           password: this.state.password
