@@ -1,50 +1,45 @@
-import React, { Component} from 'react'
+import React, { useState, useEffect } from 'react';
+import Posts from '../src/Components/Posts';
+import Pagination from '../src/Components/Pagination';
+import axios from 'axios';
+// import './App.css';
 
+const MainArea = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
 
-export default class MainArea extends Component {
-    constructor() {
-        super();
-       
-    }
-    render() {
-        return( 
-            <div>
-               <section id="team">
-        <div className="container my-3 py-5 text center">
-          <div className="row">
-            <div className="col-lg-3 col-md-6">
-              <div className="card">
-                <div className="card-body">
-                  <img src="img" alt="" className="img-fluid rounded-circle w-50 mb-3 " />
-                  <h3>anggi</h3>
-                  <h5>sdsadsdas</h5>
-                  <p>ffdsfdsfdssd </p>
-                  <div className="d-flex flex-row justify-content-center">
-                    <div className="p-4">
-                      <a href>
-                        <i className="fa fa-facebook" />
-                      </a>
-                    </div>
-                    <div className="p-4">
-                      <a href>
-                        <i className="fa fa-twitter" />
-                      </a>
-                    </div>
-                    <div className="p-4">
-                      <a href>
-                        <i className="fa fa-instagram" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      const res = await axios.get(`http://localhost:5000/engineer`);
+      setPosts(res.data);
+      setLoading(false);
+    };
 
-                           
-            </div>
-        );
-    }
-}
+    fetchPosts();
+  }, []);
+
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change page
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
+  return (
+    <div className='container mt-5'>
+      <h1 className='text-primary mb-3'>My Blog</h1>
+      <Posts posts={currentPosts} loading={loading} />
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={posts.length}
+        paginate={paginate}
+      />
+    </div>
+  );
+};
+
+export default MainArea;

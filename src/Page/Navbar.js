@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import '../Page/css/Navbar.css'
 import { Link, Redirect } from 'react-router-dom'
-import axios from 'axios'
+import Home from '../Page/Home'
+import Cards from './Cards';
+const axios = require('axios');
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 
-
-class NavbarC extends Component {
+class Navbarr extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,33 +63,26 @@ class NavbarC extends Component {
     localStorage.setItem("Login", '0');
     event.preventDefault();
   }
-  
   render() {
     return (
 
       <div>
+        {(this.state.islogin === '1') && <Redirect push to='/navbar'></Redirect>}
         <nav className="navbar navbar-expand-lg navbar-light bg-light"><ul></ul><ul></ul>
-          <img width="150" height="80" src="https://miro.medium.com/max/1200/1*5Al34czqpFDD1cXK45ifMw.png" />
+          <img width="100" height="80" src="https://miro.medium.com/max/1200/1*5Al34czqpFDD1cXK45ifMw.png" />
+          <h5>Hiring Channel</h5>
 
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          
             <ul className="navbar-nav ml-auto">
-              {/* <li className="nav-item active">
-                <a className="nav-link" href="/engineer">Home<span className="sr-only">(current)</span></a>
-              </li>
               <li className="nav-item active">
-                <a className="nav-link" href="/engineer/profil">Profil<span className="sr-only">(current)</span></a>
+                <a className="nav-link" href="/navbar">Home <span className="sr-only">(current)</span></a>
               </li>
-              <li className="nav-item active">
-                <a className="fa fa-comments fa-2x nav-link" href=""><span className="sr-only">(current)</span></a>
-              </li>
-              <li className="nav-item active">
-                <a className="fa fa-sign-out fa-2x nav-link" href="/logout"><span className="sr-only">(current)</span></a>
-              </li> */}
-              {(this.state.islogout === '1')&& <Redirect push to='/login'></Redirect>}
+            </ul>
+
+            {(this.state.islogout === '1')&& <Redirect push to='/login'></Redirect>}
             
             {
               (this.state.islogin === '0')&& <Link to={'/'}><p className="fa fa-home fa-2x" style={{ padding:'10px'}}></p></Link>
@@ -96,30 +91,26 @@ class NavbarC extends Component {
               (this.state.islogin === '0')&& <Link to={'/register'}><p style={{ padding:'10px'}}>Register</p></Link>
             } */}
             {
-              (this.state.islogin === '1')&& <Link to={'/company'} className="fa fa-home fa-2x" data-toggle="tooltip" title="Home" style={{ padding:'10px'}}></Link>
+              (this.state.islogin === '1')&& <Link to={'/profilengineer'} className="fa fa-user fa-2x" style={{ padding:'10px'}}></Link>
             }
             {
-              (this.state.islogin === '1')&& <Link to={'/profilcompany'} className="fa fa-user fa-2x" data-toggle="tooltip" title="Profile" style={{ padding:'10px'}}></Link>
+              (this.state.islogin === '1')&& <Link to={'/edit'} className="fa fa-edit fa-2x" style={{ padding:'10px'}}></Link>
             }
             {
-              (this.state.islogin === '1')&& <Link to={'/editcompany'} className="fa fa-edit fa-2x" data-toggle="tooltip" title="Edit Profile" style={{ padding:'10px'}}></Link>
+              (this.state.islogin === '1')&& <a className="fa fa-sign-out fa-2x" style={{ padding:'10px'}} onClick={this.handlerSubmit}></a>
             }
-            {
-              (this.state.islogin === '1')&& <Link to={'/project'} className="fa fa-tasks fa-2x" data-toggle="tooltip" title="Create Project" style={{ padding:'10px'}}></Link>
-            }
-            {
-              (this.state.islogin === '1')&& <Link to={'/listproject'} className="fa fa-bars fa-2x" data-toggle="tooltip" title="List Project" style={{ padding:'10px'}}></Link>
-            }
-            {
-              (this.state.islogin === '1')&& <a className="fa fa-sign-out fa-2x" data-toggle="tooltip" title="Log Out" style={{ padding:'10px'}} onClick={this.handlerSubmit}></a>
-            }
-            </ul>
+
+            {/* <form className="form-inline my-2 my-lg-0">
+              <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+              <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form> */}
           </div>
         </nav>
-
+        
+       <Cards/>
       </div>
     );
   }
 }
 
-export default NavbarC;
+export default Navbarr;

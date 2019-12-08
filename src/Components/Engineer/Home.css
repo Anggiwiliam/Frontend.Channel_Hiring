@@ -5,11 +5,8 @@
     background: url('../img/3.jpg');
     background-position: center;
     background-size: cover;
-    background-repeat: no-repeat; }
-    body {
-        font-family: 'Raleway', sans-serif;
-        color: #496174;
-        background: #fff;
-        font-size: 14px;
-        line-height: 24px; 
-      }
+    background-repeat: no-repeat;
+   }
+.styles {
+    background-color: rgb(244, 245, 244);
+}

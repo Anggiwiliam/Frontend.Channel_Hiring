@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 // import './Login.css'
 import { Redirect, Link } from 'react-router-dom'
 import axios from 'axios'
-import '../../Page/Data.css'
-
+import '../Page/Data.css'
 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data'
 
-export default class EditEngineer extends Component {
+export default class Dataengineer extends Component {
     constructor(props){
         super(props);
         this.state = {
-            name: this.props.name,
+            name: '',
             gender: '',
             date_of_birth:'',
             email:'',
@@ -20,12 +19,11 @@ export default class EditEngineer extends Component {
             showcase:'',
             description:'',
             photo: null,
-            isSubmit: '0',
-            arr_engineer: ''
+            isSubmit: '0'
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.editForm = this.editForm.bind(this);
+        this.sendForm = this.sendForm.bind(this);
     }
 
     fileChange = event => {
@@ -42,8 +40,6 @@ export default class EditEngineer extends Component {
 
         this.setState({
         [name]: value
-        },()=>{
-          console.log(this.state)
         });
     }
     
@@ -51,14 +47,15 @@ export default class EditEngineer extends Component {
         console.log('submit!');
        
             console.log('create!');
-            this.editForm();
+            this.sendForm();
         this.setState({
             isSubmit: '1'
         })
         event.preventDefault();
     }
 
-    async editForm() {
+    
+    async sendForm() {
         try{
             let formData = new FormData();
             formData.append('name', this.state.name)
@@ -72,8 +69,8 @@ export default class EditEngineer extends Component {
             formData.append('photo', this.state.photo, this.state.photo.name);
             
           const response = await axios({
-            method: 'put',
-            url: 'http://localhost:4000/myhire/edit',
+            method: 'post',
+            url: 'http://localhost:4000/myhire/form',
             data: formData
             
           });
@@ -82,31 +79,8 @@ export default class EditEngineer extends Component {
             console.log(error);
         }
     }
-    
-    componentDidMount(){
-      var idEng = this.props.match.params.id
-    
-      
-      var token = localStorage.getItem('Authorization');
-      axios.defaults.headers.common['Authorization'] = token;
-      fetch('http://localhost:4000/engineer/by/'+idEng  )
-      .then(response => response.json())
-      .then(data => this.setState({ arr_engineer: data[0] })      )
-      let login = localStorage.getItem('Login');
-      // console.log('data:'+data);
-      // console.log(this.state.arr_engineer);
-      
-      
-      if(login == 0){
-          this.setState({
-              isLogin: '0'
-          });
-      }
-    }
-
   render() {
     return (
-        
       <div className="stylis">
         <nav className="navbar fixed-top navbar-toggleable-lg navbar-dark ">
         </nav>
@@ -118,11 +92,11 @@ export default class EditEngineer extends Component {
               <div className="col-md-6">
                 <form onSubmit={this.handleSubmit}>
                   <form className="signup-form">
-                    <h3 className="text-center sign">Edit Profil</h3>
+                    <h3 className="text-center sign">Form Profil</h3>
 
                     <div className="form">
                       <label htmlFor="exampleInputEmail1">Full Name</label>
-                      <input type="text" name="name" defaultValue={this.state.arr_engineer.name} onChange={this.handleChange} className="form-control"  required="required" />
+                      <input type="text" name="name" value={this.state.name} onChange={this.handleChange} placeholder="Wajib di Isi" className="form-control"  required="required" />
                     </div>
 
                     <div className="form">
@@ -162,18 +136,17 @@ export default class EditEngineer extends Component {
 
                     <div className="form">
                       <label htmlFor="exampleInputPassword1">Foto</label>
-                      <input type="file" name="photo"  onChange={this.fileChange}  className="form-control"  />
+                      <input type="file" name="photo"  onChange={this.fileChange} placeholder="Wajib Di isi"  className="form-control" required="required"  />
                     </div>
                     <br></br>
                     <div className="">
                       <button type="submit" className="btn btn-primary">Save</button>
-                      
-                      <Link to="/engineer">Back</Link>
+                      {/* <Link to="/login">Lewati</Link> */}
                     </div>
                   </form>
                 </form>
-                {(this.state.isSubmit==='1')&&<Redirect push to='/engineer'></Redirect> }
-                  
+                {(this.state.isSubmit==='1')&&<Redirect push to='/login'></Redirect> }
+                   
               </div>
             </div>
           </div>

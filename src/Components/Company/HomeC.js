@@ -1,102 +1,87 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import NavbarC from '../Company/NavbarC';
+import '../Company/HomesC.css'
 import axios from 'axios'
-import NavbarC from './NavbarC';
-import './HomesC.css'
-import '../css/bootstrap.css'
+import {Link} from 'react-router-dom'
 
-
-
-class HomeC extends Component {
+export default class HomeC extends Component {
   constructor() {
     super();
     this.state = {
-      items : [],
-     
-    };
-    
-  }
-  // componentDidMount(){
-  //   fetch("http://localhost:5000/engineer")
-  //   .then(response => response.json())
-  //   .then(data => this.setState({ items : data}))
-  // }
+      items: [],
 
-    componentDidMount(){
-      axios.get(`http://localhost:5000/engineer`)
+    };
+
+  }
+
+  componentDidMount() {
+    axios.get(`http://localhost:4000/engineer/read`)
       .then(res => {
         console.log(res);
-        this.setState({ items: res.data});
+        this.setState({ items: res.data });
       });
-    }
-    render() {
-      const {items} = this.state
-        return(
-            <div>
-                <NavbarC/><br></br>
-                
-                <div className="text-right">
-                    
-                <form id="demo-1">  
-          <input type="search" placeholder="Search" />
-        </form>
-        <div className="text-center"><h2>List Software Engineer</h2> </div>
-        </div>
+  }
+  render() {
+    const { items } = this.state
+    return (
+      <div className="styles">
+        <NavbarC /><br></br>
+        <div className="container">
 
-           <div class="container my-1 py-2 text-left">
-             
-              <div className="row">
-              {items.map((item, index) =>             
-               
+        <Link to="/cardcom"> <button className=" btn btn-primary"><h6>Click for list Company</h6></button></Link> 
+        
+        </div>
+        <div class="container my-1 py-2 text-right">
+          
+          <form id="demo-1">
+            <input type="search" placeholder="Search Software Engineer" />
+          </form>
+          <div className="row">
+            {items.map((item, index) =>
               <div key={index}>
-              {/* <br></br>            */}
-       <div className="card-body  ml-1 mt-2" >
-        <div className="card" style={{width: '15rem'}}>
-        <img  width="400" height="200" src={`http://localhost:5000/image/`+item.foto} className="card-img-top" alt="..." />
-       
-        <h4 className="text-center">{item.name}</h4>
-        <h6 className="card-text">Skill: {item.skill}</h6>
-        <h6 className="card-text">{item.description}</h6>
-        <h6 className="text-center">{item.showcase}</h6><br></br>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Detail</button>
+                {/* <br></br>            */}
+                <div className="card-body  ml-1 mt-2" >
+                  <div className="card" style={{ width: '15rem' }}>
+                    <img width="400" height="200" src={`http://localhost:4000/myhire/file/` + item.photo} className="card-img-top" alt="..." />
+                    <h4 className="text-center">{item.name}</h4>
+                    <h6 className="card-text">{item.email}</h6>
+                    <h6 className="card-text">{item.location}</h6>
+                    <br></br>
+              
+                    <Link to={`/profileng/${item.created_by}`} className="btn btn-primary" onClick={this.getUsers}>Detail</Link>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
-      </div> 
-              )}
-              </div> 
-             
-               </div>
-
-               
 
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel" className="text-center">Detail Software Engineer</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" className="text-center">Detail Software Engineer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <tr>Name Engineer</tr>
+                <tr>Skill</tr>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="modal-body">
-        <tr>Name Engineer</tr> 
-        <tr>Skill</tr>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-               </div>
-           
-    
-            
-        );
-    }
+    );
+  }
 }
-
-export default HomeC;

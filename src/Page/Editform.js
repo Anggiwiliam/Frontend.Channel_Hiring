@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 // import './Login.css'
 import { Redirect, Link } from 'react-router-dom'
 import axios from 'axios'
-import '../../Page/Data.css'
-
+import '../Page/Data.css'
+import Navbarr from './Navbar';
 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data'
 
-export default class EditEngineer extends Component {
+export default class Editform extends Component {
     constructor(props){
         super(props);
         this.state = {
-            name: this.props.name,
-            gender: '',
+            name: '',
             date_of_birth:'',
             email:'',
             phone_number:'',
@@ -20,11 +19,11 @@ export default class EditEngineer extends Component {
             showcase:'',
             description:'',
             photo: null,
-            isSubmit: '0',
-            arr_engineer: ''
+            isSubmit: '0'
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.sendForm = this.sendForm.bind(this);
         this.editForm = this.editForm.bind(this);
     }
 
@@ -42,8 +41,6 @@ export default class EditEngineer extends Component {
 
         this.setState({
         [name]: value
-        },()=>{
-          console.log(this.state)
         });
     }
     
@@ -75,35 +72,53 @@ export default class EditEngineer extends Component {
             method: 'put',
             url: 'http://localhost:4000/myhire/edit',
             data: formData
-            
+            // data: {
+            //     name: this.state.name,
+            //     photo: this.state.photo,
+            //     gender: this.state.gender,
+            //     date_of_birth: this.state.date_of_birth,
+            //     email: this.state.email,
+            //     phone_number: this.state.phone_number, 
+            //     location: this.state.location,
+            //     skill: this.state.skill,
+            //     showcase: this.state.showcase,
+            //     description: this.state.description
+            // }
           });
             console.log(response.data.result.token);
         }catch(error) {
             console.log(error);
         }
     }
-    
-    componentDidMount(){
-      var idEng = this.props.match.params.id
-    
-      
-      var token = localStorage.getItem('Authorization');
-      axios.defaults.headers.common['Authorization'] = token;
-      fetch('http://localhost:4000/engineer/by/'+idEng  )
-      .then(response => response.json())
-      .then(data => this.setState({ arr_engineer: data[0] })      )
-      let login = localStorage.getItem('Login');
-      // console.log('data:'+data);
-      // console.log(this.state.arr_engineer);
-      
-      
-      if(login == 0){
-          this.setState({
-              isLogin: '0'
-          });
-      }
-    }
 
+    async sendForm() {
+        try{
+            let formData = new FormData();
+            formData.append('name', this.state.name)
+            formData.append('photo', this.state.photo, this.state.photo.name);
+            
+          const response = await axios({
+            method: 'post',
+            url: 'http://localhost:4000/myhire/form',
+            data: formData
+            // data: {
+            //     name: this.state.name,
+            //     photo: this.state.photo,
+            //     gender: this.state.gender,
+            //     date_of_birth: this.state.date_of_birth,
+            //     email: this.state.email,
+            //     phone_number: this.state.phone_number, 
+            //     location: this.state.location,
+            //     skill: this.state.skill,
+            //     showcase: this.state.showcase,
+            //     description: this.state.description
+            // }
+          });
+            console.log(response.data.result.token);
+        }catch(error) {
+            console.log(error);
+        }
+    }
   render() {
     return (
         
@@ -122,42 +137,50 @@ export default class EditEngineer extends Component {
 
                     <div className="form">
                       <label htmlFor="exampleInputEmail1">Full Name</label>
-                      <input type="text" name="name" defaultValue={this.state.arr_engineer.name} onChange={this.handleChange} className="form-control"  required="required" />
+                      <input type="text" name="name" value={this.state.name} onChange={this.handleChange} className="form-control"  required="required" />
+                    
                     </div>
 
                     <div className="form">
                       <label htmlFor="exampleInputEmail1">Date of Birth</label>
                       <input type="date" name="date_of_birth" value={this.state.date_of_birth} onChange={this.handleChange} className="form-control"  />
+                     
                     </div>
 
                     <div className="form">
                       <label htmlFor="exampleInputEmail1">Email</label>
                       <input type="text" name="email" value={this.state.email} onChange={this.handleChange} className="form-control"  />
+                      
                     </div>
 
                     <div className="form">
                       <label htmlFor="exampleInputEmail1">Phone Number</label>
                       <input type="text" name="phone_number" value={this.state.phone_number} onChange={this.handleChange} className="form-control"  />
+                      
                     </div>
 
                     <div className="form">
                       <label htmlFor="exampleInputEmail1">Location</label>
                       <input type="text" name="location" value={this.state.location} onChange={this.handleChange} className="form-control"  />
+                      
                     </div>
 
                     <div className="form">
                       <label htmlFor="exampleInputEmail1">Skill</label>
                       <input type="text" name="skill" value={this.state.skill} onChange={this.handleChange} className="form-control" />
+                    
                     </div>
 
                     <div className="form">
                       <label htmlFor="exampleInputEmail1">Show Case</label>
                       <input type="text" name="showcase" value={this.state.showcase} onChange={this.handleChange} className="form-control" />
+                  
                     </div>
 
                     <div className="form">
                       <label htmlFor="exampleInputEmail1">Description</label>
                       <input type="text" name="description" value={this.state.description} onChange={this.handleChange} className="form-control" />
+                     
                     </div>
 
                     <div className="form">
@@ -168,12 +191,14 @@ export default class EditEngineer extends Component {
                     <div className="">
                       <button type="submit" className="btn btn-primary">Save</button>
                       
-                      <Link to="/engineer">Back</Link>
+                      <Link to="/navbar">Back</Link>
                     </div>
                   </form>
                 </form>
                 {(this.state.isSubmit==='1')&&<Redirect push to='/engineer'></Redirect> }
-                  
+                    {/* <Link to={'/'}>
+                            <p style={{padding:'10px'}}>Back</p>
+                    </Link> */}
               </div>
             </div>
           </div>

@@ -4,7 +4,7 @@ import '../Engineer/Home.css'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-export default class HomeE extends Component {
+export default class Project extends Component {
   constructor() {
     super();
     this.state = {
@@ -29,7 +29,7 @@ export default class HomeE extends Component {
   componentDidMount() {
     var token = localStorage.getItem('Authorization');
     axios.defaults.headers.common['Authorization'] = token;
-    fetch('http://localhost:4000/engineer/read')
+    fetch('http://localhost:4000/myhire/readproject')
       .then(response => response.json())
       .then(data => this.setState({ items: data }))
     let login = localStorage.getItem('Login');

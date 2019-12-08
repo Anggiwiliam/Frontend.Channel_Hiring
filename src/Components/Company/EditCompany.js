@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 // import './Login.css'
 import { Redirect, Link } from 'react-router-dom'
 import axios from 'axios'
-import '../../Page/Data.css'
+import '../Engineer/Home.css'
+import NavbarC from './NavbarC';
 
 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data'
 
-export default class EditEngineer extends Component {
+export default class EditCompany extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -42,8 +43,6 @@ export default class EditEngineer extends Component {
 
         this.setState({
         [name]: value
-        },()=>{
-          console.log(this.state)
         });
     }
     
@@ -62,12 +61,10 @@ export default class EditEngineer extends Component {
         try{
             let formData = new FormData();
             formData.append('name', this.state.name)
-            formData.append('date_of_birth', this.state.date_of_birth)
             formData.append('email', this.state.email)
             formData.append('phone_number', this.state.phone_number)
             formData.append('location', this.state.location)
-            formData.append('skill', this.state.skill)
-            formData.append('showcase', this.state.showcase)
+            formData.append('required_skill', this.state.required_skill)
             formData.append('description', this.state.description)
             formData.append('photo', this.state.photo, this.state.photo.name);
             
@@ -89,7 +86,7 @@ export default class EditEngineer extends Component {
       
       var token = localStorage.getItem('Authorization');
       axios.defaults.headers.common['Authorization'] = token;
-      fetch('http://localhost:4000/engineer/by/'+idEng  )
+      fetch('http://localhost:4000/company/by/'+idEng  )
       .then(response => response.json())
       .then(data => this.setState({ arr_engineer: data[0] })      )
       let login = localStorage.getItem('Login');
@@ -104,10 +101,12 @@ export default class EditEngineer extends Component {
       }
     }
 
+
   render() {
     return (
-        
-      <div className="stylis">
+         
+      <div className="styles">
+        {/* <NavbarC/> */}
         <nav className="navbar fixed-top navbar-toggleable-lg navbar-dark ">
         </nav>
         <section id="Datas">
@@ -118,7 +117,7 @@ export default class EditEngineer extends Component {
               <div className="col-md-6">
                 <form onSubmit={this.handleSubmit}>
                   <form className="signup-form">
-                    <h3 className="text-center sign">Edit Profil</h3>
+                    <h3 className="text-center sign">Edit Profil Company</h3>
 
                     <div className="form">
                       <label htmlFor="exampleInputEmail1">Full Name</label>
@@ -126,14 +125,16 @@ export default class EditEngineer extends Component {
                     </div>
 
                     <div className="form">
+                      <label htmlFor="exampleInputEmail1">Email</label>
+                      <input type="text" name="email" value={this.state.email} onChange={this.handleChange} className="form-control"  />
+                    </div>
+
+                    <div className="form">
                       <label htmlFor="exampleInputEmail1">Date of Birth</label>
                       <input type="date" name="date_of_birth" value={this.state.date_of_birth} onChange={this.handleChange} className="form-control"  />
                     </div>
 
-                    <div className="form">
-                      <label htmlFor="exampleInputEmail1">Email</label>
-                      <input type="text" name="email" value={this.state.email} onChange={this.handleChange} className="form-control"  />
-                    </div>
+                  
 
                     <div className="form">
                       <label htmlFor="exampleInputEmail1">Phone Number</label>
@@ -146,14 +147,9 @@ export default class EditEngineer extends Component {
                     </div>
 
                     <div className="form">
-                      <label htmlFor="exampleInputEmail1">Skill</label>
-                      <input type="text" name="skill" value={this.state.skill} onChange={this.handleChange} className="form-control" />
-                    </div>
-
-                    <div className="form">
-                      <label htmlFor="exampleInputEmail1">Show Case</label>
-                      <input type="text" name="showcase" value={this.state.showcase} onChange={this.handleChange} className="form-control" />
-                    </div>
+                      <label htmlFor="exampleInputEmail1">Required Skill</label>
+                      <input type="text" name="required_skill" value={this.state.required_skill} onChange={this.handleChange} className="form-control" />
+                    </div>             
 
                     <div className="form">
                       <label htmlFor="exampleInputEmail1">Description</label>
@@ -168,12 +164,14 @@ export default class EditEngineer extends Component {
                     <div className="">
                       <button type="submit" className="btn btn-primary">Save</button>
                       
-                      <Link to="/engineer">Back</Link>
+                      <Link to="/company">Back</Link>
                     </div>
                   </form>
                 </form>
-                {(this.state.isSubmit==='1')&&<Redirect push to='/engineer'></Redirect> }
-                  
+                {(this.state.isSubmit==='1')&&<Redirect push to='/company'></Redirect> }
+                    {/* <Link to={'/'}>
+                            <p style={{padding:'10px'}}>Back</p>
+                    </Link> */}
               </div>
             </div>
           </div>

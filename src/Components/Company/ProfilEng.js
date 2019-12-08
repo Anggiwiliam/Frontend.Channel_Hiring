@@ -1,22 +1,28 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import NavbarE from './NavbarE';
 import { Link } from 'react-router-dom'
+import NavbarC from './NavbarC';
 
-export default class ProfilEngineer extends Component {
+export default class ProfilEng extends Component {
   constructor(props) {
     super(props)
     this.state = {
       arr_engineer: '',
+      items: []
+
     }
+    this.getall = this.getall.bind(this);
   }
- 
+
+
+
   componentDidMount(){
     var idEng = this.props.match.params.id
     console.log(idEng);
     
     var token = localStorage.getItem('Authorization');
     axios.defaults.headers.common['Authorization'] = token;
+    this.getall();
     fetch('http://localhost:4000/engineer/by/'+idEng  )
     .then(response => response.json())
     .then(data => this.setState({ arr_engineer: data[0] })      )
@@ -51,10 +57,23 @@ export default class ProfilEngineer extends Component {
   //   await axios.post(`http://localhost:5000/engineer/`, this.state)
   //   this.props.history.push('/engineer')
   // }
+  async getall(){
+    try{
+      axios.get(`http://localhost:4000/engineer/read`)
+      .then(res => {
+        console.log(res);
+        this.setState({ items: res.data });
+      }); 
+    }catch(error){
+        console.log(error)
+    }
+}
+
   render() {
+    const { items } = this.state
     return (
       <div className="styles">
-        <NavbarE />
+        <NavbarC />
         <div className="container">
           <div id="user-profile-2" className="user-profile">
             <div className="tabbable">
@@ -77,9 +96,15 @@ export default class ProfilEngineer extends Component {
                     <div className="col-xs-12 col-sm-3 center">
                       <span className="profile-picture">
                         <img className="editable img-responsive" alt=" Avatar" id="avatar2" width="250" height="250"  src={`http://localhost:4000/myhire/file/` + this.state.arr_engineer.photo} />
-                      </span>
-
+                      </span><br></br><br></br>
+                      <Link to={'/hireproject/'+this.state.arr_engineer.created_by} className="btn btn-primary">Join</Link>
                     </div>{/* /.col */}
+                    {/* <div>
+                       {items.map((item,index)=>
+                       <div key={index}> 
+                       <Link to={`/project/${item.created_by}`} className="btn btn-primary" onClick={this.getUsers}>Detail</Link>
+                           </div>)} 
+                    </div> */}
                     <div className="col-xs-12 col-sm-9">
                       <h4 className="blue">
                         <span className="middle">Biodata Engineer</span>
@@ -400,6 +425,13 @@ export default class ProfilEngineer extends Component {
 
               </div>
             </div>
+          </div>
+          <div>
+              {
+                  this.state.items.map((items)=> {
+
+                  })
+              }
           </div>
 
 
